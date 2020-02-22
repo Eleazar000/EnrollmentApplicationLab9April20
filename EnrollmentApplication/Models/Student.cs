@@ -8,7 +8,7 @@ namespace EnrollmentApplication.Models
 {
     public class Student
     { 
-        [Key] 
+        [Key]  
         [Display(Name = "Student ID")]
         public virtual int StudentId { get; set; }
 
