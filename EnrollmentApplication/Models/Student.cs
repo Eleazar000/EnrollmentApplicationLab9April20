@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 namespace EnrollmentApplication.Models
 {
     public class Student
-    {
+    { 
         [Key] 
         [Display(Name = "Student ID")]
         public virtual int StudentId { get; set; }
