@@ -15,8 +15,38 @@ namespace EnrollmentApplication.Controllers
     {
         private EnrollmentDB db = new EnrollmentDB();
 
+        public ActionResult StudentSearch(string q)
+        {
+
+            var student = GetStudent(q);
+            return PartialView("_studentSearch", student);
+        }
+
+        private List<Student> GetStudent(string searchString)
+        {
+            return db.Students
+           .Where(a => a.LastName.Contains(searchString))
+           .ToList();
+        }
+
+        public ActionResult CourseSearch(string q)
+        {
+
+            var course = GetCourse(q);
+            return PartialView("_courseSearch", course);
+        }
+
+        private List<Course> GetCourse(string searchString)
+        {
+            return db.Courses
+           .Where(a => a.CourseTitle.Contains(searchString))
+           .ToList();
+        }
+
         // GET: Enrollment
         public ActionResult Index()
+        
+        
         {
             var enrollments = db.Enrollments.Include(e => e.Course).Include(e => e.Student);
             return View(enrollments.ToList());
@@ -50,7 +80,7 @@ namespace EnrollmentApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EnrollmentId,StudentId,CourseId,Grade")] Enrollment enrollment)
+        public ActionResult Create([Bind(Include = "EnrollmentId,EnrollmentSemester,EnrollmentYear,StudentId,CourseId,Grade,Notes")] Enrollment enrollment)
         {
             if (ModelState.IsValid)
             {

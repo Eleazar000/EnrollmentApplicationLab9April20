@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace EnrollmentApplication.Models
 {
@@ -24,7 +20,7 @@ namespace EnrollmentApplication.Models
         public bool IsActive { get; set; }
 
         [Display(Name = "Assigned Campus")]
-       
+
         [Required(ErrorMessage = "Enter campus")]
         public string assignedCampus { get; set; }
 
@@ -33,9 +29,12 @@ namespace EnrollmentApplication.Models
         public string EnrollmentSemester { get; set; }
 
         [Display(Name = "Enrollment Year")]
-        [Required(ErrorMessage = "Enter Enrollment Year ")]
+       [Required(ErrorMessage = "Enter Enrollment Year ")]
         [Range(2018, int.MaxValue, ErrorMessage = "Enter value greater than 2018")]
         public int EnrollmentYear { get; set; }
+
+        [InvalidChar(InvalidCharVal="*", ErrorMessage = "cannot believe it")]
+        public string Notes { get; set; }
 
 
     }
